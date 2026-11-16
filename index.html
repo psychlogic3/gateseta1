@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PsychLogic · GATE 2027 Psychology Mock Test Series</title>
+<meta name="description" content="PsychLogic GATE 2027 Psychology (XH5) mock tests in the real GATE computer-based test format.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ 1. SIGN IN ============ -->
+<section id="scrLogin" class="screen screen-login">
+  <div class="login-shell">
+    <div class="login-left">
+      <img src="assets/logo-full.png" alt="PsychLogic" class="login-logo" draggable="false">
+      <h1 class="login-title">GATE 2027 Psychology<br>Mock Test Series</h1>
+      <p class="login-sub">GATE 2027 is organised by <b>IIT Madras</b>. It is a computer-based test on 6, 7, 13, 14, 20 and 21 February 2027, with results on 19 March 2027. The syllabus has been revised for the first time in five years, and these mocks follow the new syllabus.</p>
+      <ul class="login-facts">
+        <li><b>65</b><span>questions per test</span></li>
+        <li><b>180</b><span>minutes, as in GATE</span></li>
+        <li><b>100</b><span>marks with GATE marking</span></li>
+      </ul>
+      <p class="login-set" id="loginSet"></p>
+    </div>
+
+    <div class="login-right">
+      <form id="loginForm" class="login-card" novalidate autocomplete="off">
+        <h2>Sign in to your test series</h2>
+        <p class="muted">Use the name you enrolled with and the access code sent to you by PsychLogic.</p>
+
+        <label class="fld"><span>Full name</span>
+          <input id="inName" type="text" placeholder="e.g. Ananya Sharma" maxlength="60" required>
+        </label>
+        <label class="fld"><span>Access code</span>
+          <input id="inCode" type="text" class="mono" placeholder="psychlogicgate0000000" maxlength="40" required spellcheck="false">
+        </label>
+        <p class="form-error" id="loginErr" hidden></p>
+
+        <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+
+        <div class="login-rules">
+          <h3>Before you sign in</h3>
+          <ol>
+            <li>Type your name exactly as you enrolled. It will appear on your result report.</li>
+            <li>Your access code is personal. Do not share it; each code is issued to one student.</li>
+            <li>Tests open on their scheduled dates (Indian Standard Time). Once open, a test stays open, and you can attempt it as many times as you like.</li>
+            <li>Use one device for the whole series. Signing in from several devices may get your access blocked.</li>
+          </ol>
+        </div>
+      </form>
+      <p class="foot">© PsychLogic · Where Psychology Meets Strategy</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. TEST LIST ============ -->
+<section id="scrHub" class="screen" hidden>
+  <header class="hub-top">
+    <div class="hub-brand"><img src="assets/logo-mark.png" alt="" draggable="false"><span>Psych<b>Logic</b></span></div>
+    <div class="hub-user"><span class="avatar" id="hubAvatar">A</span><span id="hubName"></span><button class="link-btn" id="btnSignOut" type="button">Sign out</button></div>
+  </header>
+  <main class="hub-main">
+    <div class="hub-head">
+      <div>
+        <h1>Your tests</h1>
+        <p class="muted" id="hubSetName"></p>
+      </div>
+      <div class="clock" id="hubClock" title="Time used to unlock tests">
+        <span class="clock-label">Indian Standard Time</span>
+        <span class="clock-val" id="clockVal">--</span>
+        <span class="clock-src" id="clockSrc"></span>
+      </div>
+    </div>
+
+    <div class="notice">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 3l9 16H3L12 3zm0 6v4m0 3.5v.5"/></svg>
+      <p>Your sign-ins are linked to this device. You may attempt every open test as many times as you want, but only from this device. If PsychLogic detects the same access code on different devices, your access may be blocked.</p>
+    </div>
+
+    <ol class="test-list" id="testList"></ol>
+  </main>
+</section>
+
+<!-- ============ 3. INSTRUCTIONS ============ -->
+<section id="scrInstr" class="screen" hidden>
+  <header class="cbt-top">
+    <div class="cbt-brand"><img src="assets/logo-mark.png" alt="" draggable="false"><div><b id="instrTitle">Mock</b><span>GATE 2027 · Psychology (XH5)</span></div></div>
+    <div class="cbt-cand"><span class="avatar" id="instrAvatar">A</span><span id="instrName"></span></div>
+  </header>
+  <main class="instr-main">
+    <div class="instr-tabs" role="tablist">
+      <button class="itab active" data-page="1" type="button">General instructions</button>
+      <button class="itab" data-page="2" type="button">This test</button>
+    </div>
+
+    <article class="instr-page" id="instrPage1">
+      <h2>Please read the instructions carefully</h2>
+      <h3>General instructions</h3>
+      <ol>
+        <li>Total duration of the test is <b>180 minutes</b>. The clock starts when you press <b>I am ready to begin</b> and runs on its own; it cannot be paused.</li>
+        <li>The countdown timer at the top right shows the time left. When it reaches zero, the test is <b>submitted automatically</b>.</li>
+        <li>The question palette on the right shows the status of each question:
+          <div class="legend-demo">
+            <span><i class="pal st-nv">1</i> You have not visited the question yet.</span>
+            <span><i class="pal st-na">2</i> You have not answered the question.</span>
+            <span><i class="pal st-a">3</i> You have answered the question.</span>
+            <span><i class="pal st-m">4</i> You have NOT answered the question but have marked it for review.</span>
+            <span><i class="pal st-am">5</i> You have answered the question and marked it for review.</span>
+          </div>
+          A question that is <b>answered and marked for review</b> will be evaluated.</li>
+      </ol>
+      <h3>Navigating and answering</h3>
+      <ol start="4">
+        <li>Click a question number in the palette to go to it directly. <b>This does not save the answer</b> to the current question.</li>
+        <li>Click <b>Save &amp; Next</b> to save your answer and move on. <b>Mark for Review &amp; Next</b> saves the answer (if any) and flags the question. <b>Clear Response</b> removes the saved answer.</li>
+        <li><b>MCQ</b> (multiple choice): one option is correct. <b>MSQ</b> (multiple select): one or more options are correct. <b>NAT</b> (numerical answer): enter a number using the on-screen keypad only.</li>
+        <li>A virtual scientific calculator is available from the calculator button at the top.</li>
+      </ol>
+      <h3>Marking scheme (same as GATE)</h3>
+      <table class="mark-table">
+        <tr><th>Type</th><th>Correct</th><th>Wrong</th><th>Partial marks</th></tr>
+        <tr><td>MCQ, 1 mark</td><td>+1</td><td>−1/3</td><td>—</td></tr>
+        <tr><td>MCQ, 2 marks</td><td>+2</td><td>−2/3</td><td>—</td></tr>
+        <tr><td>MSQ</td><td>+1 or +2</td><td>0</td><td>None. All correct options, and only those, must be chosen.</td></tr>
+        <tr><td>NAT</td><td>+1 or +2</td><td>0</td><td>None</td></tr>
+      </table>
+      <div class="instr-nav"><button class="btn btn-primary" type="button" data-goto="2">Next</button></div>
+    </article>
+
+    <article class="instr-page" id="instrPage2" hidden>
+      <h2 id="instrTestName">Test</h2>
+      <p class="instr-covers" id="instrCovers"></p>
+      <div class="instr-facts" id="instrFacts"></div>
+
+      <div class="warn-box">
+        <h3>Device and attempt rules</h3>
+        <ul>
+          <li>Your name, access code, device and network (IP) details are recorded each time you start a test.</li>
+          <li>You may attempt this test <b>as many times as you like</b>, at any time, from <b>this same device</b>.</li>
+          <li>If the same access code is detected on different devices, your access to the series may be blocked without a refund.</li>
+          <li>Copying, screenshots and sharing of questions are not permitted. The questions are the property of PsychLogic.</li>
+        </ul>
+      </div>
+
+      <label class="declare">
+        <input type="checkbox" id="chkDeclare">
+        <span>I have read and understood the instructions. I agree to follow the rules above, and I will attempt this test only from this device.</span>
+      </label>
+      <p class="form-error" id="instrErr" hidden></p>
+      <div class="instr-nav">
+        <button class="btn btn-ghost" type="button" data-goto="1">Previous</button>
+        <button class="btn btn-ghost" type="button" id="btnBackHub">Back to tests</button>
+        <button class="btn btn-primary" type="button" id="btnBegin">I am ready to begin</button>
+      </div>
+    </article>
+  </main>
+</section>
+
+<!-- ============ 4. EXAM (GATE CBT) ============ -->
+<section id="scrExam" class="screen exam" hidden>
+  <header class="cbt-top">
+    <div class="cbt-brand"><img src="assets/logo-mark.png" alt="" draggable="false"><div><b id="examTitle">Mock</b><span>GATE 2027 · Psychology (XH5)</span></div></div>
+    <div class="cbt-tools">
+      <button class="tool" type="button" id="btnPaper" title="Question paper"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h7"/></svg><span>Question paper</span></button>
+      <button class="tool" type="button" id="btnInstr" title="Instructions"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2"/></svg><span>Instructions</span></button>
+      <button class="tool" type="button" id="btnCalc" title="Virtual calculator"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>Calculator</span></button>
+    </div>
+  </header>
+
+  <div class="cbt-bar">
+    <div class="sec-tabs" id="secTabs"></div>
+    <div class="timer" id="timer"><span>Time left</span><b id="timerVal">03:00:00</b></div>
+  </div>
+
+  <div class="cbt-body">
+    <main class="q-pane">
+      <div class="q-meta">
+        <div class="q-meta-l"><b>Question <span id="qNo">1</span></b><span class="q-type" id="qType">MCQ</span></div>
+        <div class="q-meta-r"><span id="qMarks">Marks: +1 · Negative: −1/3</span><button class="btn btn-sm mob-only" id="btnPal" type="button">Palette</button></div>
+      </div>
+      <div class="q-scroll">
+        <div class="q-text" id="qText"></div>
+        <div class="q-opts" id="qOpts"></div>
+        <div class="nat" id="natBox" hidden>
+          <input id="natIn" class="nat-in mono" type="text" readonly placeholder="Enter your answer" aria-label="Numerical answer">
+          <div class="keypad" id="keypad"></div>
+        </div>
+      </div>
+      <footer class="q-actions">
+        <div class="qa-left">
+          <button class="btn btn-mark" type="button" id="btnMark">Mark for Review &amp; Next</button>
+          <button class="btn btn-ghost" type="button" id="btnClear">Clear Response</button>
+        </div>
+        <div class="qa-right">
+          <button class="btn btn-ghost" type="button" id="btnPrev">Back</button>
+          <button class="btn btn-save" type="button" id="btnSave">Save &amp; Next</button>
+        </div>
+      </footer>
+    </main>
+
+    <aside class="side" id="side">
+      <button class="x mob-only side-close" id="sideClose" type="button" aria-label="Close palette">✕</button>
+      <div class="side-cand"><span class="avatar lg" id="examAvatar">A</span><div><b id="examName"></b><span class="muted" id="examCode"></span></div></div>
+      <div class="side-legend" id="sideLegend"></div>
+      <div class="side-sec" id="sideSec">XH5 Psychology</div>
+      <div class="palette" id="palette"></div>
+      <button class="btn btn-submit btn-block" type="button" id="btnSubmit">Submit</button>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+  </div>
+</section>
+
+<!-- ============ 5. RESULT ============ -->
+<section id="scrResult" class="screen" hidden>
+  <header class="hub-top">
+    <div class="hub-brand"><img src="assets/logo-mark.png" alt="" draggable="false"><span>Psych<b>Logic</b> · Result report</span></div>
+    <div class="hub-user"><button class="btn btn-ghost btn-sm" id="btnRetake" type="button">Attempt again</button><button class="btn btn-primary btn-sm" id="btnResHub" type="button">All tests</button></div>
+  </header>
+  <main class="res-main">
+    <div class="res-hero" id="resHero"></div>
+    <div class="res-tabs">
+      <button class="rtab active" data-r="analysis" type="button">Performance analysis</button>
+      <button class="rtab" data-r="answers" type="button">Answers &amp; explanations</button>
+      <button class="rtab" data-r="history" type="button">Attempt history</button>
+    </div>
+    <div class="res-panel" id="rAnalysis"></div>
+    <div class="res-panel" id="rAnswers" hidden></div>
+    <div class="res-panel" id="rHistory" hidden></div>
+  </main>
+</section>
+
+<!-- ============ MODALS ============ -->
+<div class="modal" id="mSubmit" hidden>
+  <div class="modal-card">
+    <h3>Submit the test?</h3>
+    <p class="muted">Here is your exam summary. After you submit, you cannot change any answer in this attempt.</p>
+    <table class="sum-table" id="sumTable"></table>
+    <div class="modal-actions"><button class="btn btn-ghost" type="button" id="btnSubNo">No, go back</button><button class="btn btn-submit" type="button" id="btnSubYes">Yes, submit</button></div>
+  </div>
+</div>
+
+<div class="modal" id="mPaper" hidden>
+  <div class="modal-card wide">
+    <div class="modal-head"><h3>Question paper</h3><button class="x" type="button" data-close="mPaper" aria-label="Close">✕</button></div>
+    <div class="paper-list" id="paperList"></div>
+  </div>
+</div>
+
+<div class="modal" id="mInstr" hidden>
+  <div class="modal-card wide">
+    <div class="modal-head"><h3>Instructions</h3><button class="x" type="button" data-close="mInstr" aria-label="Close">✕</button></div>
+    <div id="mInstrBody"></div>
+  </div>
+</div>
+
+<div class="calc" id="calc" hidden>
+  <div class="calc-head" id="calcHead"><span>Scientific calculator</span><button class="x" type="button" id="calcClose" aria-label="Close calculator">✕</button></div>
+  <input class="calc-expr mono" id="calcExpr" readonly>
+  <input class="calc-out mono" id="calcOut" readonly value="0">
+  <div class="calc-keys" id="calcKeys"></div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="wm" id="wm" aria-hidden="true"></div>
+
+<script src="data/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
