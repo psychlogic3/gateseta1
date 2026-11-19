@@ -1,0 +1,43 @@
+name: Publish site and unlock mocks
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "31 4 * * *"    # 10:01 AM IST
+    - cron: "47 4 * * *"    # backup 10:17 AM IST
+    - cron: "13 5 * * *"    # backup 10:43 AM IST
+    - cron: "41 5 * * *"    # backup 11:11 AM IST
+    - cron: "23 7 * * *"    # backup 12:53 PM IST
+  workflow_dispatch:         # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build site and unlock due papers
+        env:
+          UNLOCK_KEY: ${{ secrets.UNLOCK_KEY }}
+        run: node scripts/build.js
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
